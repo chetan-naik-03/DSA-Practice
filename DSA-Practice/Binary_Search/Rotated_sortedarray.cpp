@@ -1,25 +1,42 @@
-class Solution {
-    public :
-    int serach(vector<int>nums, int target) {
-        int st =0, end = nums.size()-1;
+#include <iostream>
+#include <vector>
+using namespace std;
 
-        while(st <= end) {
-            int mid = st + (end-st)/2;
-            if(A[mid] == tar){
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int st = 0, end = nums.size() - 1;
+
+        while (st <= end) {
+            int mid = st + (end - st) / 2;
+
+            if (nums[mid] == target) {
                 return mid;
             }
-            if (A[st] <= A[mid]) { //left sorted
-                if(A[st] <= tar && tar<= A[mid]){
-                    end = mid -1;{
-                        st = mid +1;
-                    }
-                }else { // right sorted
-                   if(A[mid] <= tar && tar<= A[end]){ 
-                    st = mid +1;{
-                        end = mid -1;
+
+            if (nums[st] <= nums[mid]) { // left sorted
+                if (nums[st] <= target && target < nums[mid]) {
+                    end = mid - 1;
+                } else {
+                    st = mid + 1;
+                }
+            } else { // right sorted
+                if (nums[mid] < target && target <= nums[end]) {
+                    st = mid + 1;
+                } else {
+                    end = mid - 1;
                 }
             }
         }
+        return -1;
     }
- return -1;
+};
+
+int main() {
+    Solution sol;
+    vector<int> nums = {4,5,6,7,0,1,2};
+    int target = 0;
+
+    cout << sol.search(nums, target);
+    return 0;
 }
